@@ -20,6 +20,8 @@
         <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
         <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
         <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+        
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
 
         <style>
             html, body {
@@ -76,11 +78,17 @@ var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), 
     let groundTexture = new BABYLON.Texture(Assets.textures.checkerboard_basecolor_png.rootUrl, scene);
     ground.material.diffuseTexture = groundTexture;
     
-    BABYLON.SceneLoader.ImportMesh("", Assets.meshes.Yeti.rootUrl, Assets.meshes.Yeti.filename, scene, function(newMeshes){
-    newMeshes[0].scaling = new BABYLON.Vector3(0.1,0.1,0.1);
-    });
+      // Append glTF model to scene.
+      BABYLON.SceneLoader.Append("assets/stylized-cap/source/", "KEPKA.glb", scene, function (scene) {
+        // Create a default arc rotate camera and light.
+        scene.createDefaultCameraOrLight(true, true, true);
 
-    BABYLON.SceneLoader.ImportMeshAsync("", "/assets/", "scene.gltf")
+        // The default camera looks at the back of the asset.
+        // Rotate the camera by 180 degrees to the front of the asset.
+        scene.activeCamera.alpha += Math.PI;
+    });
+    
+    // BABYLON.SceneLoader.ImportMeshAsync("", "/assets/", "scene.gltf")
             
     return scene;
 };
