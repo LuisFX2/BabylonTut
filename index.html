@@ -69,19 +69,12 @@ var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), 
     var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 
     // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 0.7;
-
-    // Our built-in 'ground' shape.
-    var ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 6, height: 6}, scene);
-    let groundMaterial = new BABYLON.StandardMaterial("Ground Material", scene);
-    ground.material = groundMaterial;
-    let groundTexture = new BABYLON.Texture(Assets.textures.checkerboard_basecolor_png.rootUrl, scene);
-    ground.material.diffuseTexture = groundTexture;
+    light.intensity = 1;
     
       // Append glTF model to scene.
-      BABYLON.SceneLoader.Append("assets/stylized-cap/source/", "KEPKA.glb", scene, function (scene) {
+      BABYLON.SceneLoader.Append("./assets/", "Minimal_Default.glb", scene, function (scene) {
         // Create a default arc rotate camera and light.
-        scene.createDefaultCameraOrLight(true, true, true);
+        // scene.createDefaultCameraOrLight(true, true, true);
 
         // The default camera looks at the back of the asset.
         // Rotate the camera by 180 degrees to the front of the asset.
