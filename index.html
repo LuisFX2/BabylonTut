@@ -80,6 +80,8 @@ var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), 
     newMeshes[0].scaling = new BABYLON.Vector3(0.1,0.1,0.1);
     });
 
+    BABYLON.SceneLoader.ImportMeshAsync("", "/assets/", "scene.gltf")
+            
     return scene;
 };
                 window.initFunction = async function() {
